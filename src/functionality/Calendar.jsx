@@ -7,12 +7,14 @@ import Navbar from "../pages/Navbar";
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [eventName, setEventName] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [events, setEvents] = useState([]);
   const [timers, setTimers] = useState({});
   const [showPopup, setShowPopup] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessages, setErrorMessages] = useState({});
 
-  // Handle date selection
   const handleDateClick = (date) => {
     const today = new Date();
     if (date < new Date(today.setHours(0, 0, 0, 0))) {
@@ -21,73 +23,101 @@ const Calendar = () => {
     }
     setSelectedDate(date);
     setShowPopup(true);
+    setErrorMessages({});
   };
 
-  // Add an event
   const handleAddEvent = () => {
-    if (!eventName) {
-      alert("Please enter an event name.");
+    const errors = {};
+
+    if (!eventName.trim()) {
+      errors.eventName = "Event name is required.";
+    }
+
+    if (!startTime) {
+      errors.startTime = "Start time is required.";
+    }
+
+    if (!endTime) {
+      errors.endTime = "End time is required.";
+    }
+
+    if (startTime && endTime && endTime <= startTime) {
+      errors.timeValidation = "End time must be greater than start time.";
+    }
+
+    setErrorMessages(errors);
+
+    if (Object.keys(errors).length > 0) {
       return;
     }
 
     const localDate = selectedDate.toLocaleDateString("en-CA");
-    const currentDate = new Date().toLocaleDateString("en-CA");
 
-    if (localDate < currentDate) {
-     
-     return;
-    }
+    const newEvent = {
+      date: localDate,
+      name: eventName,
+      startTime: startTime,
+      endTime: endTime,
+    };
 
-    const newEvent = { date: localDate, name: eventName };
-
-    // Add the event to the list
     setEvents((prevEvents) => [...prevEvents, newEvent]);
     setEventName("");
+    setStartTime("");
+    setEndTime("");
     setShowPopup(false);
     setSuccessMessage("Event added successfully!");
 
-    // Hide the success message after 2 seconds
     setTimeout(() => {
       setSuccessMessage("");
     }, 2000);
     alert("Event added successfully!");
   };
 
-  // Update timers for all events
   useEffect(() => {
     const interval = setInterval(() => {
       const updatedTimers = {};
 
       events.forEach((event) => {
-        const eventTime = new Date(`${event.date}T23:59:59`).getTime();
-        const now = new Date().getTime();
-        const timeDiff = eventTime - now;
+        const now = new Date();
+        const startDateTime = new Date(`${event.date}T${event.startTime}`).getTime();
+        const endDateTime = new Date(`${event.date}T${event.endTime}`).getTime();
+        const currentTime = now.getTime();
 
-        if (timeDiff <= 0) {
-          updatedTimers[event.date] = "00h 00m 00s remaining";
-        } else {
-          const day = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        if (currentTime < startDateTime) {
+          updatedTimers[event.date + event.startTime] = "Event not started yet";
+        } else if (currentTime >= startDateTime && currentTime <= endDateTime) {
+          const timeDiff = endDateTime - currentTime;
+
           const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
           const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
           const seconds = Math.floor((timeDiff / 1000) % 60);
 
-          updatedTimers[event.date] = `${day}d ${hours
+          updatedTimers[event.date + event.startTime] = `${hours
             .toString()
-            .padStart(2, "0")}h ${minutes
-            .toString()
-            .padStart(2, "0")}m ${seconds
+            .padStart(2, "0")}h ${minutes.toString().padStart(2, "0")}m ${seconds
             .toString()
             .padStart(2, "0")}s remaining`;
+        } else {
+          updatedTimers[event.date + event.startTime] = "Event ended";
         }
       });
 
       setTimers(updatedTimers);
     }, 1000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, [events]);
 
-  // Highlight dates with events
+  const renderEventTime = (date, time) => {
+    const formattedTime = new Date(`${date}T${time}`).toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
+    return formattedTime;
+  };
+
   const highlightEventDates = ({ date }) => {
     const formattedDate = date.toLocaleDateString("en-CA");
     return events.some((event) => event.date === formattedDate)
@@ -95,7 +125,6 @@ const Calendar = () => {
       : null;
   };
 
-  // Display event names on the calendar
   const renderTileContent = ({ date }) => {
     const formattedDate = date.toLocaleDateString("en-CA");
     const event = events.find((event) => event.date === formattedDate);
@@ -113,7 +142,6 @@ const Calendar = () => {
       <div className="calendar-container">
         <h1 className="calendar-title">Event Countdown Calendar</h1>
 
-        {/* Calendar view */}
         <div className="calendar-view">
           <CalendarView
             className="react-calendar"
@@ -127,23 +155,24 @@ const Calendar = () => {
           />
         </div>
 
-        {/* Events list */}
         <div className="events-list">
           <h2>Upcoming Events</h2>
           <ul>
             {events
-              .sort((a, b) => new Date(a.date) - new Date(b.date)) 
+              .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
                 <li key={index} className="event-item">
                   <strong>{event.name}</strong> - {new Date(event.date).toDateString()}
                   <br />
-                  {timers[event.date] || "Loading countdown..."}
+                  Time: {renderEventTime(event.date, event.startTime)} to{" "}
+                  {renderEventTime(event.date, event.endTime)}
+                  <br />
+                  {timers[event.date + event.startTime] || "Loading countdown..."}
                 </li>
               ))}
           </ul>
         </div>
 
-        {/* Popup for adding an event */}
         {showPopup && (
           <div className="popup-overlay">
             <div className="popup-content">
@@ -151,11 +180,49 @@ const Calendar = () => {
               <p>Selected Date: {selectedDate.toDateString()}</p>
               <input
                 type="text"
-                placeholder="Event Name"
+                placeholder="Add the event name"
                 value={eventName}
                 onChange={(e) => setEventName(e.target.value)}
                 className="name-input"
               />
+              {errorMessages.eventName && (
+                <p className="error-message">{errorMessages.eventName}</p>
+              )}
+
+              <textarea
+                placeholder="Add the event description"
+                className="description-input"
+              ></textarea>
+
+              <label className="start-label" htmlFor="start-time">
+                Start Time
+              </label>
+              <input
+                type="time"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                className="time-input"
+              />
+              {errorMessages.startTime && (
+                <p className="error-message">{errorMessages.startTime}</p>
+              )}
+
+              <label className="end-label" htmlFor="end-time">
+                End Time
+              </label>
+              <input
+                type="time"
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+                className="time-input"
+              />
+              {errorMessages.endTime && (
+                <p className="error-message">{errorMessages.endTime}</p>
+              )}
+              {errorMessages.timeValidation && (
+                <p className="error-message">{errorMessages.timeValidation}</p>
+              )}
+
               <div className="popup-actions">
                 <button onClick={handleAddEvent} className="add-event-btn">
                   Add Event
@@ -171,7 +238,6 @@ const Calendar = () => {
           </div>
         )}
 
-        {/* Success message popup */}
         {successMessage && (
           <div className="success-popup">
             <p>{successMessage}</p>
