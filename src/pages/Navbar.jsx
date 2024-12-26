@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { PiFlowerFill } from "react-icons/pi";
 import "../Styles/Navbar.css";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [activeTab, setActiveTab] = useState("Dashboard");
@@ -9,6 +10,15 @@ function Navbar() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  React.useEffect(() => {
+    const path = location.pathname;
+    if (path === "/") {
+      setActiveTab("Dashboard");
+    } else if (path === "/Calendar") {
+    setActiveTab("Calendar");
+    }
+  }, [location]);
 
   return (
     <nav className="navbar">
@@ -25,13 +35,15 @@ function Navbar() {
           className={`menu-item ${activeTab === "Dashboard" ? "active" : ""}`}
           onClick={() => setActiveTab("Dashboard")}
         >
-          Dashboard
+
+          <Link to="/">Dashboard</Link>
         </li>
         <li
           className={`menu-item ${activeTab === "Calendar" ? "active" : ""}`}
-          onClick={() => setActiveTab("Calendar")}
+          onClick={() => setActiveTab("Calendar")} 
         >
-          Calendar
+          <Link to="/Calendar">Calendar</Link>
+
         </li>
         <li
           className={`menu-item ${activeTab === "Projects" ? "active" : ""}`}

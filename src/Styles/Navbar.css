@@ -43,6 +43,10 @@
   font-size: 19px;
 }
 
+.menu-item a {
+  text-decoration: none;
+  color: inherit;
+}
 .menu-item.active {
   color: #fff;
   background-color: #4caf50;
