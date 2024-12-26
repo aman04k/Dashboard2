@@ -1,0 +1,45 @@
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 3fr 1.1fr;
+  gap: 10px;
+  min-height: 100vh;
+}
+
+.left-section {
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+
+.right-section {
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .dashboard-container {
+    grid-template-columns: 2fr 1fr; /* Adjust column ratios for medium screens */
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    grid-template-columns: 1fr; /* Stacks sections vertically */
+  }
+
+  .left-section {
+    margin-bottom: 10px; /* Add spacing between stacked sections */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dashboard-container {
+    padding: 10px; /* Add padding for small screens */
+  }
+
+  .left-section,
+  .right-section {
+    border-radius: 10px; /* Adjust border radius for smaller screens */
+  }
+}

@@ -1,0 +1,307 @@
+
+.salary-incentive-container {
+  padding: 20px;
+  background-color: #f4f9fc;
+  max-width: 900px;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-bar {
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  flex: 1;
+  margin-right: 15px;
+  min-width: 200px;
+  font-size: 16px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #444;
+}
+
+.icon:hover {
+  color: #3b8ea5;
+}
+
+.profile-pic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+/* Salary Section */
+.salary-section {
+  margin-top: 20px;
+}
+
+.salary-section h2 {
+  font-size: 18px;
+  color: #666;
+}
+
+.salary-section h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.salary-list {
+  margin-top: 15px;
+}
+
+.salary-item {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.salary-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.avatar {
+  margin-right: 15px;
+}
+
+.avatar-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.details {
+  flex: 1;
+}
+
+.details h4 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.details p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.status {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 15px;
+  text-align: center;
+  min-width: 70px;
+}
+
+.status.waiting {
+  background-color: #ffecb3;
+  color: #e68a00;
+}
+
+.status.done {
+  background-color: #e6ffed;
+  color: #28a745;
+}
+
+.status.failed {
+  background-color: #ffe6e6;
+  color: #d93025;
+}
+
+/* Card Section */
+.card {
+  background-color: #40738D;
+  color: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 18px;
+}
+
+.section.basic-salary {
+  
+  background-color: #a8df65;
+  color: white;
+  padding: 10px;
+  border-radius: 18px;
+  display: flex;
+  height: 30px;
+  align-items: center;
+  width: 75%;
+  justify-content: space-between;
+
+
+}
+
+.section.performance {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 18px;
+  display: flex;
+  height: 30px;
+  align-items: center;
+  width: 55%;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
+.section-bonus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.section-bonus p {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.section.gift {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  border-radius: 18px;
+  display: flex;
+  width: 38%;
+  align-items: center;
+  height: 30px;
+  justify-content: space-between;
+}
+
+.payment-section {
+  text-align: center;
+}
+.payment {
+  margin-left: 72%;
+  font-size: 22px;
+}
+
+.payment-section .take-home {
+  font-size: 25px;
+  font-weight: 300;
+  margin-left: 60%;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.icon1{
+  color: black;
+  font-size: 38px;
+  border-radius: 18px;
+  width: 50px;
+  height: 40px;
+  align-items: center;
+  background-color: white;
+}
+.icon2{
+  color: white;
+  font-size: 38px;
+  border-radius: 18px;
+  width: 50%;
+  height: 42px;
+  align-items: center;
+  background-color: #a8df65;
+
+}
+.icon-salary {
+  font-size: 30px;
+  font-weight: 600;
+  padding-left: 46%;
+}
+
+/* Responsive Design */
+
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .icons {
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+
+  .salary-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .avatar {
+    margin-bottom: 10px;
+  }
+
+  .details {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .search-bar {
+    margin-bottom: 15px;
+  }
+  .icon-salary {
+    font-size: 30px;
+    font-weight: 600;
+    padding-left: 21%;
+  }
+  .payment-section .take-home {
+    font-size: 25px;
+    font-weight: 300;
+    margin-left: 36%;
+  }
+}

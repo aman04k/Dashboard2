@@ -1,0 +1,142 @@
+.match-graph-container {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  padding: 0 15px; /* Ensuring some padding on sides */
+}
+
+.bars-container {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  flex-wrap: wrap; /* Allows wrapping for smaller screens */
+  width: 100%; /* Ensure the bars container takes full width */
+}
+
+.bar {
+  width: 10px;
+  height: 30px;
+  border-radius: 4px;
+}
+
+.bar.matched {
+  background-color: rgb(93, 176, 117);
+}
+
+.bar.not-matched {
+  background-color: #d3d3d3; /* Gray */
+}
+
+.legend {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  flex-wrap: wrap; /* Wraps legend items on smaller screens */
+  justify-content: center;
+  width: 100%;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.matched-dot {
+  background-color: rgb(93, 176, 117);
+}
+
+.not-matched-dot {
+  background-color: #d3d3d3;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For tablets and below (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .bars-container {
+    gap: 6px;
+  }
+
+  .bar {
+    width: 12px;
+    height: 35px;
+  }
+
+  .legend {
+    font-size: 12px;
+    gap: 15px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* For small screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .match-graph-container {
+    margin-top: 20px;
+  }
+
+  .bars-container {
+    gap: 8px;
+    justify-content: space-evenly;
+  }
+
+  .bar {
+    width: 15px;
+    height: 40px;
+  }
+
+  .legend {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* For very small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .match-graph-container {
+    margin-top: -8px;
+    padding: 7px;
+  }
+
+  .bars-container {
+    gap: 10px;
+    justify-content: space-around;
+  }
+
+  .bar {
+    width: 12px;
+    height: 62px;
+    padding-bottom: 10px;
+  }
+
+  .legend {
+    font-size: 12px;
+    gap: 5px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
