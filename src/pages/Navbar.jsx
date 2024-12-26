@@ -18,6 +18,9 @@ function Navbar() {
     } else if (path === "/Calendar") {
     setActiveTab("Calendar");
     }
+    else if (path === "/Events") {
+      setActiveTab("Events");
+    }
   }, [location]);
 
   return (
@@ -58,10 +61,11 @@ function Navbar() {
           Team
         </li>
         <li
-          className={`menu-item ${activeTab === "Documents" ? "active" : ""}`}
-          onClick={() => setActiveTab("Documents")}
+          className={`menu-item ${activeTab === "Events" ? "active" : ""}`}
+          onClick={() => setActiveTab("Events")}
         >
-          Documents
+          <Link to="/Events">Events</Link>
+          
         </li>
       </ul>
     </nav>
