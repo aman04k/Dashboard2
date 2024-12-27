@@ -26,6 +26,8 @@ function Team() {
   ]);
 
   const [isAdding, setIsAdding] = useState(false);
+  const [isViewing, setIsViewing] = useState(false); // New state for viewing details
+  const [viewingEmployee, setViewingEmployee] = useState(null); // Employee to view in the popup
   const [newEmployee, setNewEmployee] = useState({
     name: "",
     date: "",
@@ -69,9 +71,8 @@ function Team() {
   };
 
   const handleView = (employee) => {
-    alert(
-      `Employee Details:\nName: ${employee.name}\nDate: ${employee.date}\nSalary: ${employee.salary}\nDay: ${employee.day}`
-    );
+    setViewingEmployee(employee); // Set employee to view
+    setIsViewing(true); // Show the popup
   };
 
   const handleRemove = (id) => {
@@ -103,6 +104,11 @@ function Team() {
         );
       }
     }
+  };
+
+  const closeViewPopup = () => {
+    setIsViewing(false);
+    setViewingEmployee(null); // Reset the employee being viewed
   };
 
   return (
@@ -176,6 +182,27 @@ function Team() {
           </div>
         </div>
       )}
+
+      {isViewing && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Employee Details</h2>
+            <div>
+              <img
+                src={viewingEmployee.image}
+                alt={`${viewingEmployee.name}`}
+                className="employee-image"
+              />
+              <p><strong>Name:</strong> {viewingEmployee.name}</p>
+              <p><strong>Date:</strong> {viewingEmployee.date}</p>
+              <p><strong>Salary:</strong> {viewingEmployee.salary}</p>
+              <p><strong>Day:</strong> {viewingEmployee.day}</p>
+            </div>
+            <button onClick={closeViewPopup} className="close-btn">Close</button>
+          </div>
+        </div>
+      )}
+
       <div className={isAdding ? "table-disabled" : ""}>
         <table className="team-table">
           <thead>
