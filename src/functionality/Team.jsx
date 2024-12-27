@@ -26,15 +26,18 @@ function Team() {
   ]);
 
   const [isAdding, setIsAdding] = useState(false);
-  const [isViewing, setIsViewing] = useState(false); // New state for viewing details
-  const [viewingEmployee, setViewingEmployee] = useState(null); // Employee to view in the popup
+  const [isViewing, setIsViewing] = useState(false);
+  const [viewingEmployee, setViewingEmployee] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingEmployee, setEditingEmployee] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
   const [newEmployee, setNewEmployee] = useState({
     name: "",
     date: "",
     salary: "",
     day: "",
   });
-  const [imagePreview, setImagePreview] = useState(null);
 
   const toggleAddForm = () => {
     setIsAdding(!isAdding);
@@ -71,8 +74,8 @@ function Team() {
   };
 
   const handleView = (employee) => {
-    setViewingEmployee(employee); // Set employee to view
-    setIsViewing(true); // Show the popup
+    setViewingEmployee(employee);
+    setIsViewing(true);
   };
 
   const handleRemove = (id) => {
@@ -80,35 +83,39 @@ function Team() {
     setEmployees(updatedEmployees);
   };
 
-  const handleUpdate = (id) => {
-    const employeeToUpdate = employees.find((employee) => employee.id === id);
-    if (employeeToUpdate) {
-      const updatedName = prompt("Enter the updated name:", employeeToUpdate.name);
-      const updatedDate = prompt("Enter the updated date (YYYY-MM-DD):", employeeToUpdate.date);
-      const updatedSalary = prompt("Enter the updated salary:", employeeToUpdate.salary);
-      const updatedDay = prompt("Enter the updated day:", employeeToUpdate.day);
+  const handleUpdate = (employee) => {
+    setEditingEmployee(employee);
+    setImagePreview(employee.image); // Preserve the current image
+    setIsEditing(true);
+  };
 
-      if (updatedName && updatedDate && updatedSalary && updatedDay) {
-        setEmployees((prevEmployees) =>
-          prevEmployees.map((employee) =>
-            employee.id === id
-              ? {
-                  ...employee,
-                  name: updatedName,
-                  date: updatedDate,
-                  salary: updatedSalary,
-                  day: updatedDay,
-                }
-              : employee
-          )
-        );
-      }
-    }
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault();
+    const updatedEmployees = employees.map((employee) =>
+      employee.id === editingEmployee.id
+        ? { ...editingEmployee, image: imagePreview || editingEmployee.image }
+        : employee
+    );
+    setEmployees(updatedEmployees);
+    setIsEditing(false);
+    setEditingEmployee(null);
+    setImagePreview(null); // Clear preview after saving
   };
 
   const closeViewPopup = () => {
     setIsViewing(false);
-    setViewingEmployee(null); // Reset the employee being viewed
+    setViewingEmployee(null);
+  };
+
+  const closeEditPopup = () => {
+    setIsEditing(false);
+    setEditingEmployee(null);
+    setImagePreview(null);
+  };
+
+  const handleEditInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditingEmployee((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -118,6 +125,7 @@ function Team() {
       <button className="add-employee-btn" onClick={toggleAddForm}>
         Add Employee
       </button>
+
       {isAdding && (
         <div className="modal">
           <div className="modal-content">
@@ -203,7 +211,71 @@ function Team() {
         </div>
       )}
 
-      <div className={isAdding ? "table-disabled" : ""}>
+      {isEditing && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Edit Employee</h2>
+            <form onSubmit={handleUpdateSubmit}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter Name"
+                value={editingEmployee.name}
+                onChange={handleEditInputChange}
+                required
+              />
+              <input
+                type="date"
+                name="date"
+                value={editingEmployee.date}
+                onChange={handleEditInputChange}
+                required
+              />
+              <input
+                type="text"
+                name="salary"
+                placeholder="Enter Salary"
+                value={editingEmployee.salary}
+                onChange={handleEditInputChange}
+                required
+              />
+              <input
+                type="text"
+                name="day"
+                placeholder="Enter Day"
+                value={editingEmployee.day}
+                onChange={handleEditInputChange}
+                required
+              />
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleImageChange} // Allow image change
+              />
+              {imagePreview && (
+                <div className="image-preview">
+                  <img src={imagePreview} alt="Preview" className="preview-img" />
+                </div>
+              )}
+              <div className="modal-actions">
+                <button type="submit" className="submit-btn">
+                  Save Changes
+                </button>
+                <button
+                  type="button"
+                  className="cancel-btn"
+                  onClick={closeEditPopup}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      <div className={isAdding || isEditing ? "table-disabled" : ""}>
         <table className="team-table">
           <thead>
             <tr>
@@ -238,7 +310,7 @@ function Team() {
                   </button>
                   <button
                     className="action-btn update-btn"
-                    onClick={() => handleUpdate(employee.id)}
+                    onClick={() => handleUpdate(employee)}
                   >
                     <FaRegEdit />
                   </button>
