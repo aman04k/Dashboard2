@@ -5,8 +5,19 @@ function Events() {
   return (
     <div>
      <Navbar />
-      <h1>Events</h1>
-      fghjk
+      <div className="AllEvents">
+
+      </div>
+      <div className="OnGoingEvents">
+
+      </div>
+      <div className="CloseEvents">
+
+      </div>
+      <div className="futureEvents">
+
+        
+      </div>
     </div>
   )
 }
