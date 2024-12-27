@@ -8,6 +8,7 @@ import { Navigate } from "react-router-dom";
 const Calendar = ({ onAddEvent, events }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [eventName, setEventName] = useState("");
+  const [description, setDescription] = useState(""); // State for description
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [errorMessages, setErrorMessages] = useState({});
@@ -28,6 +29,7 @@ const Calendar = ({ onAddEvent, events }) => {
   const handleAddEvent = () => {
     const errors = {};
     if (!eventName.trim()) errors.eventName = "Event name is required.";
+    if (!description.trim()) errors.description = "Description is required."; // Description validation
     if (!startTime) errors.startTime = "Start time is required.";
     if (!endTime) errors.endTime = "End time is required.";
     if (startTime && endTime && endTime <= startTime) {
@@ -40,12 +42,14 @@ const Calendar = ({ onAddEvent, events }) => {
     const newEvent = {
       date: selectedDate.toLocaleDateString("en-CA"),
       name: eventName,
+      description, // Include description
       startTime,
       endTime,
     };
 
     onAddEvent(newEvent);
     setEventName("");
+    setDescription(""); // Clear description
     setStartTime("");
     setEndTime("");
     setShowPopup(false);
@@ -57,6 +61,7 @@ const Calendar = ({ onAddEvent, events }) => {
   const handleCancel = () => {
     setShowPopup(false);
     setEventName("");
+    setDescription(""); // Clear description
     setStartTime("");
     setEndTime("");
     setErrorMessages({});
@@ -90,7 +95,14 @@ const Calendar = ({ onAddEvent, events }) => {
             {errorMessages.eventName && (
               <p className="error-message">{errorMessages.eventName}</p>
             )}
-            <textarea placeholder="Event Description"></textarea>
+            <textarea
+              placeholder="Event Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+            {errorMessages.description && (
+              <p className="error-message">{errorMessages.description}</p>
+            )}
             <div className="time-inputs">
               <label className="start-label" htmlFor="startTime">
                 Start Time:

@@ -54,7 +54,6 @@ function Events({ events }) {
         let timeLeft;
 
         if (now < startDateTime) {
-          
           timeLeft = startDateTime - now;
         } else if (now >= startDateTime && now <= endDateTime) {
           timeLeft = endDateTime - now;
@@ -67,7 +66,6 @@ function Events({ events }) {
           const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
           const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
           const seconds = Math.floor((timeLeft / 1000) % 60);
-
 
           updatedCountdowns[event.name] = `${day}d  ${hours}h ${minutes}m ${seconds}s`;
         } else {
@@ -90,6 +88,7 @@ function Events({ events }) {
             <li key={index}>
               <strong>{event.name}</strong> - {new Date(event.date).toDateString()}{" "}
               ({event.startTime} to {event.endTime})
+              <p><em>Description:</em> {event.description}</p>
               <div>
                 {countdowns[event.name] !== null
                   ? `Countdown: ${countdowns[event.name] || "Loading..."}`
