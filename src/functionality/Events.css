@@ -1,0 +1,89 @@
+
+
+  .allEvents {
+    max-width: 750px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 60px;
+    
+  }
+  
+  /* Section titles for event categories */
+  h2 {
+    color: #333;
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #4caf50;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Event list container */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Individual event list items */
+  li {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Hover effect for event list items */
+  li:hover {
+    background-color: #e6f7ff;
+    border-color: #4caf50;
+  }
+  
+  /* Styling for event name */
+  li strong {
+    color: #4caf50;
+    font-size: 1.1rem;
+  }
+  
+  /* Empty list message */
+  p {
+    text-align: center;
+    color: #888;
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+  
+  /* Responsive styling for smaller screens */
+  @media (max-width: 768px) {
+    div {
+      padding: 1rem;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+  
+    li {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    li strong {
+      font-size: 1.2rem;
+    }
+  
+    p {
+      font-size: 0.9rem;
+    }
+  }
+  
