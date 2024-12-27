@@ -54,13 +54,11 @@ function Events({ events }) {
         let timeLeft;
 
         if (now < startDateTime) {
-          // Time left until the event starts
+          
           timeLeft = startDateTime - now;
         } else if (now >= startDateTime && now <= endDateTime) {
-          // Time left until the event ends
           timeLeft = endDateTime - now;
         } else {
-          // Event is closed; no countdown
           timeLeft = null;
         }
 
@@ -69,6 +67,7 @@ function Events({ events }) {
           const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
           const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
           const seconds = Math.floor((timeLeft / 1000) % 60);
+
 
           updatedCountdowns[event.name] = `${day}d  ${hours}h ${minutes}m ${seconds}s`;
         } else {

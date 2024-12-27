@@ -90,6 +90,7 @@ const Calendar = ({ onAddEvent, events }) => {
             {errorMessages.eventName && (
               <p className="error-message">{errorMessages.eventName}</p>
             )}
+            <textarea placeholder="Event Description"></textarea>
             <div className="time-inputs">
               <label className="start-label" htmlFor="startTime">
                 Start Time:
