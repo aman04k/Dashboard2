@@ -231,7 +231,8 @@ h1 {
     width: 95%;
   }
 
-  .team-table th, .team-table td {
+  .team-table th,
+  .team-table td {
     padding: 10px;
   }
 
@@ -260,7 +261,8 @@ h1 {
     width: 90%;
   }
 
-  .submit-btn, .cancel-btn {
+  .submit-btn,
+  .cancel-btn {
     width: 100%;
     padding: 12px;
   }
@@ -302,7 +304,8 @@ h1 {
     width: 70%;
   }
 
-  .submit-btn, .cancel-btn {
+  .submit-btn,
+  .cancel-btn {
     width: 100%;
     padding: 12px;
   }

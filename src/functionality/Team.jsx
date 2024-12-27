@@ -251,7 +251,7 @@ function Team() {
                 type="file"
                 name="image"
                 accept="image/*"
-                onChange={handleImageChange} // Allow image change
+                onChange={handleImageChange} 
               />
               {imagePreview && (
                 <div className="image-preview">
