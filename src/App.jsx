@@ -3,6 +3,7 @@ import "./App.css";
 import Dashboard from "./components/Dashboard";
 import Calendar from "./functionality/Calendar";
 import Events from "./functionality/Events";
+import Team from "./functionality/Team";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -18,13 +19,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        {/* Pass handleAddEvent and events to Calendar */}
         <Route
           path="/calendar"
           element={<Calendar onAddEvent={handleAddEvent} events={events} />}
         />
-        {/* Pass events to Events */}
         <Route path="/events" element={<Events events={events} />} />
+        <Route path="/team" element={<Team />} />
       </Routes>
     </BrowserRouter>
   );
