@@ -228,8 +228,7 @@ h1 {
 }
 
 .pagination-link {
-  padding: 10px 15px;
-  border: 1px solid #ddd;
+ 
   background-color: #f9f9f9;
   cursor: pointer;
 }

@@ -35,7 +35,7 @@ function Team() {
   ]);
 
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [formMode, setFormMode] = useState(""); // "add" or "edit"
+  const [formMode, setFormMode] = useState(""); 
   const [currentEmployee, setCurrentEmployee] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
@@ -46,7 +46,7 @@ function Team() {
     image: null,
   });
 
-  const [viewEmployee, setViewEmployee] = useState(null); // For viewing details
+  const [viewEmployee, setViewEmployee] = useState(null); 
   const [pageNumber, setPageNumber] = useState(0);
   const employeesPerPage = 3;
   const pageVisited = pageNumber * employeesPerPage;
@@ -116,7 +116,7 @@ function Team() {
       const newId = employees.length ? employees[employees.length - 1].id + 1 : 1;
       setEmployees([
         { id: newId, ...formData, image: imagePreview || formData.image },
-        ...employees, // Add the new employee at the top of the list
+        ...employees, 
       ]);
     } else if (formMode === "edit") {
       setEmployees(
@@ -205,6 +205,7 @@ function Team() {
             nextLinkClassName={"pagination-link"}
             disabledClassName={"pagination-disabled"}
             activeClassName={"pagination-active"}
+            
           />
         </>
       )}
