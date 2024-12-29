@@ -142,7 +142,7 @@ const CenterRight = () => {
             </span>
           </div>
           <div className="team-change">
-            <span className="change-value positive">+2.6%</span>
+            <span className="change-value positive1">+2.6%</span>
             <span className="change-icon up">⬆️</span>
           </div>
         </div>

@@ -38,6 +38,7 @@
   font-weight: 600;
   font-size: 1.1rem;
   color: #272525;
+  margin-right: 145px;
 }
 
 .team-percentage {
@@ -124,7 +125,12 @@
 }
 
 .change-value.positive {
-  color: green;
+  color: white;
+  font-size: 1.2rem;
+}
+.change-value.positive1 {
+  color:green;
+  font-size: 1.2rem;
 }
 
 .change-value.negative {

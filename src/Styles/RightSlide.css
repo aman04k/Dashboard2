@@ -113,6 +113,7 @@
   margin: 0;
   color: #777;
   font-size: 14px;
+  margin-right: 100px;
 }
 
 .status {
@@ -127,16 +128,21 @@
 .status.waiting {
   background-color: #ffecb3;
   color: #e68a00;
+  font-size:1rem;
+
 }
 
 .status.done {
   background-color: #e6ffed;
   color: #28a745;
+  font-size:1rem;
 }
 
 .status.failed {
   background-color: #ffe6e6;
   color: #d93025;
+  font-size:1rem;
+
 }
 
 /* Card Section */
