@@ -92,7 +92,7 @@ const CenterRight = () => {
             ))}
           </div>
         </div>
-        <div className="extra-info">
+        {/* <div className="extra-info">
           <div className="team-info">
             <div className="team-percentage">
               <div className="admin-icon">
@@ -109,7 +109,52 @@ const CenterRight = () => {
               </span>
             </div>
           </div>
+        </div> */}
+
+
+<div className="team-stats-container">
+      {/* Onsite Team */}
+      <div className="team-card onsite-team">
+        <div className="team-header">
+          <div className="team-icon">
+            <span role="img" aria-label="onsite-icon">
+              👤
+            </span>
+          </div>
+          <div className="team-change">
+            <span className="change-value positive">+2.6%</span>
+            <span className="change-icon down">⬇️</span>
+          </div>
         </div>
+        <div className="team-percentage">
+        <div className="team-percentage">80%</div>
+        <div className="team-label">Onsite team</div>
+        </div>
+        
+      </div>
+
+      {/* Remote Team */}
+      <div className="team-card remote-team">
+        <div className="team-header">
+          <div className="team-icon">
+            <span role="img" aria-label="remote-icon">
+              🌐
+            </span>
+          </div>
+          <div className="team-change">
+            <span className="change-value positive">+2.6%</span>
+            <span className="change-icon up">⬆️</span>
+          </div>
+        </div>
+        <div className="team-percentage">
+          <div className="team-percentage">20%</div>
+          <div className="team-label">Remote team</div>
+        </div>
+      </div>
+    </div>
+
+
+
       </div>
 
       <div className="grafh-container">

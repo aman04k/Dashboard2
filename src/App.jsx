@@ -15,6 +15,10 @@ function App() {
     setEvents((prevEvents) => [...prevEvents, newEvent]);
   };
 
+  //Shared state to manage form visibility or using the context api and show the data one to onther componet
+
+
+
   return (
     <BrowserRouter>
       <Routes>

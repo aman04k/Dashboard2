@@ -63,6 +63,96 @@
   border-radius: 40px;
 }
 
+
+ /* Pages.css */
+
+ .team-stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 300px;
+  background-color: #40738D;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.onsite-team {
+  background-color: transparent;
+  color: #fff;
+}
+
+.remote-team {
+  background-color: #ffffff;
+  color: #000;
+  border: 1px solid #dcdcdc;
+}
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.team-icon {
+  font-size: 1.5rem;
+}
+
+.team-percentage {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.team-change {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.change-value {
+  font-size: 1rem;
+}
+
+.change-value.positive {
+  color: green;
+}
+
+.change-value.negative {
+  color: red;
+}
+
+.change-icon {
+  font-size: 1rem;
+}
+
+.change-icon.up {
+  color: green;
+}
+.team-percentage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.change-icon.down {
+  color: red;
+}
+
+.team-label {
+  font-size: 1rem;
+}
+
 .percentage {
   background: #dff2e1;
   color: #007bff;
@@ -83,7 +173,7 @@
 }
 
 .chart-container-center {
-  width: 100%;
+  width: 55%;
   height: 40vh;
 }
 
